@@ -1,22 +1,18 @@
 package shootingstar.typing.repository.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import shootingstar.typing.entity.Text;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
+@Data
 public class BoardContentDto {
 
     private Long id;
     private String title;
 
-    public static BoardContentDto of(Text text) {
-        return BoardContentDto.builder().id(text.getId())
-                .title(text.getTitle())
-                .build();
+    @QueryProjection
+    public BoardContentDto(Long id, String title) {
+        this.id = id;
+        this.title = title;
     }
 }

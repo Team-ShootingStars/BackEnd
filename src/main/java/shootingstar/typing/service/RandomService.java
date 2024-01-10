@@ -21,10 +21,3 @@ public class RandomService {
         return id;
     }
 }
-/* 내가 하려고 한 방법
-    findall -햇을때 왜 안뜨지 반응이 없지 ㅠ
-
-    1. 기존 findalltextbylangdto 리스트로 가져오기
-    2. 사이즈 값 구해서 랜덤값 가져오기
-    3. 해당 번호에 대한 id값 getid
- */
