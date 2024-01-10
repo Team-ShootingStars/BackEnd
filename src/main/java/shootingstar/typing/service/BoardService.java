@@ -1,11 +1,12 @@
 package shootingstar.typing.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import shootingstar.typing.entity.Text;
+import shootingstar.typing.entity.CodeLanguage;
 import shootingstar.typing.repository.BoardRepository;
-import shootingstar.typing.repository.TextRepository;
-import shootingstar.typing.repository.dto.BoardContentDto;
+import shootingstar.typing.repository.dto.FindBoardContentByLangDto;
 
 import java.util.List;
 
@@ -13,11 +14,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-    private final TextRepository textRepository;
 
-    public List<BoardContentDto> getBoardList(){
+    private String convertJson(Object object) throws JsonProcessingException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(object);
+    }
 
-        List<Text> allContent = boardRepository.findAll();
-        return null;
+    public String getContentText(CodeLanguage lang) throws JsonProcessingException {
+        List<FindBoardContentByLangDto> texts = boardRepository.findBoardContentByLang(lang);
+        return convertJson(texts);
     }
 }
